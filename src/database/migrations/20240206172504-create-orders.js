@@ -2,19 +2,19 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Orders', {
-      order_id: {
+    await queryInterface.createTable('orders', {
+      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      customer_id: {
+      user_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'Customers', // References the 'Customers' table
-          key: 'customer_id',
+          model: 'users', // References the 'Customers' table
+          key: 'id',
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
@@ -23,7 +23,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'Books', // References the 'Books' table
+          model: 'books', // References the 'Books' table
           key: 'book_id',
         },
         onUpdate: 'CASCADE',
@@ -32,7 +32,6 @@ module.exports = {
       order_date: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       status: {
         type: Sequelize.STRING,
@@ -42,16 +41,14 @@ module.exports = {
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP')
       }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Orders');
+    await queryInterface.dropTable('orders');
   }
 };

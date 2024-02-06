@@ -1,15 +1,14 @@
 // src/config/database.ts
 import { Sequelize } from 'sequelize';
 
-const sequelize = new Sequelize(process.env.DEV_DATABASE_NAME!, process.env.DEV_DATABASE_USER!, process.env.DEV_DATABASE_PASSWORD, {
-  host: process.env.DEV_DATABASE_HOST!,
+const sequelize = new Sequelize('postgresql://teerenzo:J1I4sXiAhDmC@ep-solitary-firefly-a5vzcfgm.us-east-2.aws.neon.tech/neondb?sslmode=require', {
   dialect: 'postgres',
-  pool: {
-    max: 5,
-    min: 0,
-    acquire: 30000,
-    idle: 10000,
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
   },
-});
+  })
 
 export default sequelize;

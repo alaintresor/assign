@@ -1,12 +1,20 @@
-import { User } from "src/entity/User";
+import { User } from "../entity/User";
 export class UserRepository {
-    public findUserById = async (id: string): Promise<any> => {
-      return User.findByPk(id);
-    };
 
-    public createUser = async (userData: any): Promise<any> => {
-      return User.create(userData);
-    };
-    
+  public getAll = async (): Promise<any> => {
+    return await User.findAll();
+  };
+
+  public findUserById = async (id: string): Promise<any> => {
+    return await User.findByPk(id);
+  };
+
+  public createUser = async (userData: any): Promise<any> => {
+    return await User.create(userData);
+  };
+
+  public getUserByEmail = async (email: string): Promise<any> => {
+    return await User.findOne({ where: { email } });
   }
-  
+
+}

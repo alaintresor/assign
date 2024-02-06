@@ -1,12 +1,13 @@
-// import * as dotenv from "dotenv";
-// dotenv.config();
-
-
 import express from "express";
 import { json, urlencoded } from "body-parser";
 import cors from "cors";
+import * as dotenv from "dotenv";
+import sequelize from "./config/database";
+import router from "./router";
 
-import  sequelize  from "./config/database";
+dotenv.config();
+
+
 
 const app = express();
 
@@ -24,6 +25,8 @@ app.use(
     })
 );
 app.use(json());
+
+app.use("/api/v1", router);
 
 
 const start = async () => {

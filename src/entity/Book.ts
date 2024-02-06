@@ -1,7 +1,6 @@
 // src/entity/Book.ts or src/models/Book.ts
 import { Model, DataTypes } from 'sequelize';
 import sequelize from '../config/database'; // Adjust the import path as necessary
-import { Tag } from './Tag';
 
 
 export class Book extends Model {
@@ -15,20 +14,20 @@ export class Book extends Model {
 
 Book.init({
   id: {
-    type: DataTypes.INTEGER.UNSIGNED,
+    type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   },
   title: {
-    type: new DataTypes.STRING(128),
+    type: new DataTypes.STRING,
     allowNull: false,
   },
   writer: {
-    type: new DataTypes.STRING(128),
+    type: new DataTypes.STRING,
     allowNull: false,
   },
   coverImage: {
-    type: new DataTypes.STRING(255),
+    type: new DataTypes.STRING,
     allowNull: false,
   },
   price: {
@@ -36,7 +35,7 @@ Book.init({
     allowNull: false,
   },
   tags: {
-    type: new DataTypes.STRING(255), // This could be an array or JSON type depending on your database support
+    type: new DataTypes.STRING, // This could be an array or JSON type depending on your database support
     allowNull: false,
   },
 }, {
@@ -44,5 +43,4 @@ Book.init({
   sequelize,
 });
 
-Book.belongsToMany(Tag, { through: 'BookTags', foreignKey: 'bookId' });
-Tag.belongsToMany(Book, { through: 'BookTags', foreignKey: 'tagId' });
+
