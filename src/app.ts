@@ -1,9 +1,12 @@
-import * as dotenv from "dotenv";
-dotenv.config();
+// import * as dotenv from "dotenv";
+// dotenv.config();
+
 
 import express from "express";
 import { json, urlencoded } from "body-parser";
 import cors from "cors";
+
+import  sequelize  from "./config/database";
 
 const app = express();
 
@@ -25,6 +28,8 @@ app.use(json());
 
 const start = async () => {
     try {
+        await sequelize.authenticate();
+        console.log("Connection has been established successfully.");
     } catch (err) {
         throw new Error("database error!");
     }

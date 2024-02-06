@@ -16,7 +16,7 @@ module.exports = {
       points: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        defaultValue: 100 // Assuming every new customer starts with 100 points
+        defaultValue: 100 
       },
       createdAt: {
         allowNull: false,

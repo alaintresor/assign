@@ -1,41 +1,39 @@
 'use strict';
 
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up (queryInterface, Sequelize) {
     await queryInterface.createTable('BookTags', {
-      book_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
+      bookId: {
+        type: Sequelize.INTEGER.UNSIGNED,
         references: {
-          model: 'Books', // Name of the created table
-          key: 'book_id',
+          model: 'books', // name of the books table
+          key: 'id',
         },
         onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+        onDelete: 'CASCADE',
       },
-      tag_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
+      tagId: {
+        type: Sequelize.INTEGER.UNSIGNED,
         references: {
-          model: 'Tags', // Name of the created table
-          key: 'tag_id',
+          model: 'tags', // name of the tags table
+          key: 'id',
         },
         onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+        onDelete: 'CASCADE',
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP')
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
       }
     });
   },
-  async down(queryInterface, Sequelize) {
+  async down (queryInterface, Sequelize) {
     await queryInterface.dropTable('BookTags');
   }
 };
